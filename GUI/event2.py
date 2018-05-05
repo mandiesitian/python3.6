@@ -27,6 +27,7 @@ canves.bind_all('<KeyPress-Right>',movetriangle);
 
 root.mainloop();
 
-
+# event.keysym event 包含发生事件的相关数据，keysym（key symbol）是event
+# 对象中包含的变量，是一个字符串，包含了实际按键的值。
 
 
