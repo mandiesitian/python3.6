@@ -31,6 +31,11 @@
 
 # 事件类型：键盘事件 鼠标事件 窗体事件
 
+# 键盘事件：KeyPress KeyRelease
+# 鼠标事件：BuutonPress ButtonRelease ..
+# 窗体事件: Map FocusIn(组件获得焦点时触发） FocusOut（推动焦点时触发）...
+
+
 
 
 
