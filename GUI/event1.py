@@ -9,9 +9,10 @@ canves.pack();
 p1=10,10;
 p2=10,60;
 p3=50,35;
-r=canves.create_polygon(p1,p2,p3,fill='yellow',outline='blue');
-#r  创建三角形实例
-def moverriangle(a):
-    canves.move(a,5,0);
+canves.create_polygon(p1,p2,p3,fill='yellow',outline='blue');
+#  创建三角形实例
+def moverriangle(event):  #此方法参数列表可以是任何值  但不为空  一般为eent
+    canves.move(1,5,0);
 
-canves.bind_all('KeyPress-')
+canves.bind_all('<KeyPress-A>',moverriangle);   #此方法无参数 只有方法名
+root.mainloop();
