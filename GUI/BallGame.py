@@ -14,10 +14,11 @@ canvas.pack();
 root.update();
 
 class Ball:
-    def __init__(self,canvas,color):
+    def __init__(self,canvas,paddle,color):
         self.canvas=canvas;
         self.id=canvas.create_oval(10,10,25,25,fill=color);
         self.canvas.move(self.id,245,100);
+        self.paddle=paddle;
 
         start=[-3,-2,-1,1,2,3];
         random.shuffle(start);   #将start列表随机排列  值仍在start中
@@ -30,19 +31,38 @@ class Ball:
         #获取画布当前高度
         self.canvas_width = self.canvas.winfo_width();
         #获取画布当前宽度
+
+        self.hit_bottom=False;
+
+    def hit_paddle(self,pos):
+        paddle_pos=self.canvas.coords(self.paddle.id);
+        if(pos[2]>=paddle_pos[0] and pos[0]<=paddle_pos[2]):
+            if(pos[3]>=paddle_pos[1] and pos[3]<=paddle_pos[3]):
+                return True;
+            else:
+                return False;
+        else:
+            return False;
+
+
     def draw(self):
         self.canvas.move(self.id,self.x,self.y);
         pos=self.canvas.coords(self.id);   #coords返回画布上画好的x，y坐标  列表  左上右下
 
 
-        if(pos[1]<=0):
-            self.y=3;
-        if(pos[3]>=self.canvas_height):
+        if(self.hit_paddle(pos)==True):
             self.y=-3;
-        if(pos[0]<=0):
-            self.x=3;
-        if(pos[2]>=self.canvas_width):
-            self.x=-3;
+        else:
+            if(pos[1]<=0):
+                self.y=3;
+            if(pos[3]>=self.canvas_height):
+                self.y=-3;
+            if(pos[0]<=0):
+                self.x=3;
+            if(pos[2]>=self.canvas_width):
+                self.x=-3;
+
+
 class Paddle:
     def __init__(self,canvas,color):
         self.canvas=canvas;
@@ -71,7 +91,7 @@ class Paddle:
     def draw(self):
         self.canvas.move(self.id,self.x,0);
         pos=self.canvas.coords(self.id);
-
+        # print(pos);
 
         if(pos[0]<=0):
             self.x=0;
@@ -80,20 +100,17 @@ class Paddle:
 
 
 
-
-
-
-ball=Ball(canvas,'red');
 paddle=Paddle(canvas,'blue')
-
+ball=Ball(canvas,paddle,'red');
 while 1:
-    # ball.draw();
     if(paddle.start==True):
         paddle.draw();
         ball.draw();
     root.update_idletasks();
     root.update();
     time.sleep(0.01);
+
+# root.mainloop();
 
 
 
