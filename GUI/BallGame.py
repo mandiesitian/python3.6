@@ -24,6 +24,8 @@ class Ball:
 
         self.x=start[0];
         self.y=-3;
+        # self.x=random.randint(1,4);
+        # self.y=random.randint(1,100);
         self.canvas_height=self.canvas.winfo_height();
         #获取画布当前高度
         self.canvas_width = self.canvas.winfo_width();
