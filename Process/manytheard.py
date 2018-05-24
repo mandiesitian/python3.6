@@ -22,6 +22,7 @@ threading.activeCount()  返回当前’进程‘里面线程的个数  包含�
 '''
 
 #听音乐的同时写文档
+#此程序用python3.6 IDLE执行
 
 from time import ctime,sleep;
 import threading;
@@ -34,7 +35,7 @@ def music():
 def word():
     for i in range(2):
         print('I an write word{}'.format(ctime()));
-        sleep(1);
+        sleep(2);
 
 threads=[];
 t1=threading.Thread(target=music);       #定义多线程，执行music方法，只传方法名
