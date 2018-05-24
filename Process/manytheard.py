@@ -20,3 +20,33 @@ threading.activeCount()  返回当前’进程‘里面线程的个数  包含�
                             参数表示超过这个时间，不管完没完都回收线程，然后主线程接着执行
 
 '''
+
+#听音乐的同时写文档
+
+from time import ctime,sleep;
+import threading;
+def music():
+    for i in range(2):
+        print('I am listen music {}'.format(ctime()));
+        sleep(1);
+
+
+def word():
+    for i in range(2):
+        print('I an write word{}'.format(ctime()));
+        sleep(1);
+
+threads=[];
+t1=threading.Thread(target=music);       #定义多线程，执行music方法，只传方法名
+threads.append(t1);
+t2=threading.Thread(target=word);
+threads.append(t2);
+
+if __name__=='__main__':          #程序从此处开始执行
+    for t in threads:
+        t.setDaemon(True);      #将线程声明为守护线程，不声明线程会被无线挂起
+        t.start();            #启动线程
+
+    print('all over{}'.format(ctime()));
+
+
