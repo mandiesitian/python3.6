@@ -2,6 +2,8 @@
 '''
 加入jion（）函数，用于等待线程终止，在子线程完成运行之前，这个子线程的父线程将一直等待
 '''
+
+#用IDLE执行
 from time import ctime,sleep;
 import threading;
 def music():
@@ -27,3 +29,10 @@ if __name__=='__main__':
         t.start();
     t.join()
     print('all over {}'.format(ctime()));
+
+
+'''
+当程序执行时启动主线程，主线程又启动了一个听音乐的线程和一个写文档的线程，因为使用了join() 方法，只有当子线程运行结束
+后，主线程才会继续执行在join()方法后面的代码，最后主线程推出，此乃单进程多线程
+
+'''
