@@ -9,10 +9,12 @@ import time;
 
 s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM);# socket.SOSK_DGRAM 表示UDP
 #绑定端口
-s.bind('127.0.0.1',10000);
+s.bind(('127.0.0.1',10000));
 print('监听端口.......');
 while True:
     data,addr=s.recvfrom(1024);  #接收数据
     print('接收来自{}的信息'.format(addr));
-    s.sendto('hellow ,{}'.format(addr));  #发送数据
+    str1='hellow,{}'.format(data);
+    sd=bytes(str1,encoding='utf-8');
+    s.sendto(sd);  #发送数据
 
