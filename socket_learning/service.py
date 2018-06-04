@@ -11,16 +11,21 @@ import time;
 
 def tcplink(sock,addr):
     print('接收新的连接。。。{}'.format(addr));
-
-    sock.send('欢迎您！');
+    sock.send(bytes('欢迎您',encoding='utf-8'));
     while True:
         data=sock.recv(1024);   #接收客户端数据
         time.sleep(1);
-        if data=='exit' or not data:  #数据是exit退出
+        if data=='exit' or not data:        #数据是exit退出
+            sock.send('关闭主机的连接。。。');
+            sock.close();  # 关闭连接
             break;
+        else:
+            # data=str(data);
+            # data='您好'+data;
+            sock.send(bytes(data,encoding='utf-8'));    #发送信息给客户端
+            str=data.decode();
+            print(str);
 
-        sock.send('您好，{}'.format(data));  #发送信息个客户端
-    sock.close();             #关闭连接
     print('连接关闭{}'.format(addr));
 
 #创建一个socket
@@ -34,8 +39,8 @@ print('等待客户端连接....')
 while True:
     # 接收一个连接
     sock,addr=s.accept();
-    t=threading.Thread(target=tcplink,args=(sock,addr));
+    t=threading.Thread(target=tcplink,args=(sock,addr));  #相当于传入tcplink方法
     #  创建线程来处理TCP连接
-
+    t.setDaemon(True)
     t.start();
 
