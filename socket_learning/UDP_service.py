@@ -16,5 +16,5 @@ while True:
     print('接收来自{}的信息'.format(addr));
     str1='hellow,{}'.format(data);
     sd=bytes(str1,encoding='utf-8');
-    s.sendto(sd);  #发送数据
+    s.sendto(sd,addr);  #发送数据
 
