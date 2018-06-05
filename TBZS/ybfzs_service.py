@@ -15,6 +15,27 @@ readable():缓冲区是否有可读数据
 writeable()：缓冲区是否有可写数据
 
 '''
+import time,socket;
+def start():
+    sock=socket.socket(socket.AF_INET,socket.SOCK_STREAM);#TCP连接
+    sock.bind(('127.0.0.1',8888));      #绑定sock
+    sock.listen(1);
+    print('正在监听端口...');
+    clientsock,clientaddr=sock.accept();
+    print('Connected by {}...'.format(clientaddr));
+    while True:
+        data=clientsock.recv(1024);
+        if not data:
+            break;
+        print('data={}'.format(data));
+        clientsock.send('first:'+data);
+        time.sleep(2); #睡眠2秒
+        clientsock.send('second:'+data);
 
+    clientsock.close();
+    sock.close();
+
+if __name__=='__main__':
+    start();
 
 
