@@ -11,13 +11,15 @@ def sub_bit(N):
 def source(data):
     fp=open('CRC.txt','w');
     for i in range(0,data+1):
-        dbin="{:0148b}".format(i);
-        dbin=' '.join(dbin);
-        print(dbin);
-        fp.writelines(dbin+'\n');
+        dbin="{:08b}".format(i);
+        if((dbin[0]!='0') and (dbin[7]!='0')):
+            dbin = ' '.join(dbin);
+            fp.writelines(dbin+'\n');
+
+
     fp.close();
 
 # source(7);
 
-data_sum=sub_bit(148)
+data_sum=sub_bit(8)
 source(data_sum);
